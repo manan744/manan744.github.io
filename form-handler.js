@@ -12,13 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = document.getElementById('submitBtn');
 
     // --- GOOGLE FORM CONFIGURATION ---
-    // Update these once you have your Form IDs
-    const GOOGLE_FORM_ACTION_URL = 'YOUR_GOOGLE_FORM_ACTION_URL_HERE'; // e.g. https://docs.google.com/forms/u/0/d/e/.../formResponse
+    const GOOGLE_FORM_ACTION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfOOD52kG0R-JRlV7Di4u3r7ukAUDO9OxV1rX9rkBjKe3kyRQ/formResponse';
     const FIELD_IDS = {
-        company: 'entry.XXXXX',    // Replace XXXXX with true ID
-        name: 'entry.XXXXX',
-        phone: 'entry.XXXXX',
-        email: 'entry.XXXXX'
+        company: 'entry.1095351703',
+        name: 'entry.1168783314',
+        phone: 'entry.1504404048',
+        email: 'entry.6887052'
     };
 
     // Modal Logic
@@ -70,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             showError('name', 'Contact person is required');
             isValid = false;
         }
-        
+
         const phone = data.get('phone').trim();
         if (!phone) {
             showError('phone', 'Phone number is required');
