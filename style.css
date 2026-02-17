@@ -730,17 +730,17 @@ nav {
     backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    /* Start from top to prevent clipping */
-    overflow-y: auto;
-    /* Scroll the overlay itself */
+    align-items: flex-start !important;
+    /* Force top alignment for all browsers */
+    overflow-y: scroll;
+    /* Force scrollbar to prevent layout shifts */
     padding: 2rem 0;
-    /* Add space at top and bottom */
     z-index: 2000;
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
 }
+
 
 .modal-overlay.active {
     opacity: 1;
