@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
         company: 'entry.1095351703',
         name: 'entry.1168783314',
         phone: 'entry.1504404048',
-        email: 'entry.6887052'
+        email: 'entry.6887052',
+        productCodes: 'entry.913746104'
     };
 
     // Open Modal Action
@@ -120,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
         urlParams.append(FIELD_IDS.name, formData.get('name'));
         urlParams.append(FIELD_IDS.phone, formData.get('phone'));
         urlParams.append(FIELD_IDS.email, formData.get('email'));
+        urlParams.append(FIELD_IDS.productCodes, formData.get('productCodes'));
 
         try {
             // Silently submit to Google Forms
