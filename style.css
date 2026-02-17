@@ -730,7 +730,12 @@ nav {
     backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    /* Start from top to prevent clipping */
+    overflow-y: auto;
+    /* Scroll the overlay itself */
+    padding: 2rem 0;
+    /* Add space at top and bottom */
     z-index: 2000;
     opacity: 0;
     visibility: hidden;
@@ -745,13 +750,15 @@ nav {
 .modal-content {
     width: 90%;
     max-width: 500px;
-    max-height: 90vh;
-    overflow-y: auto;
     position: relative;
     padding: 3rem 2rem;
+    background: #fdfcf9;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
     transform: scale(0.8);
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
 
 /* Custom scrollbar for modal content (optional but nice) */
 .modal-content::-webkit-scrollbar {
@@ -894,7 +901,9 @@ nav {
     .modal-content {
         padding: 2.5rem 1.2rem 1.5rem;
         width: 95%;
-        max-height: 85vh;
+        margin-top: 1rem;
+        /* Extra space from top on mobile */
     }
+
 
 }
