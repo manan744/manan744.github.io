@@ -6,6 +6,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('leadModal');
     const openBtn = document.getElementById('openModal');
+    const openModalBtn = document.getElementById('openModalBtn');
     const closeBtn = document.getElementById('closeModal');
     const form = document.getElementById('leadForm');
     const successMsg = document.getElementById('successMessage');
@@ -20,11 +21,23 @@ document.addEventListener('DOMContentLoaded', () => {
         email: 'entry.6887052'
     };
 
-    // Modal Logic
-    const openModal = () => {
+    // Open Modal Action
+    function openModalAction() {
         modal.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Prevent scroll
-    };
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Modal Events
+    if (openModalBtn) {
+        openModalBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openModalAction();
+        });
+    }
+
+    if (openBtn) {
+        openBtn.addEventListener('click', openModalAction);
+    }
 
     const closeModal = () => {
         modal.classList.remove('active');
@@ -38,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     };
 
-    openBtn.addEventListener('click', openModal);
     closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => {
         if (e.target === modal) closeModal();
