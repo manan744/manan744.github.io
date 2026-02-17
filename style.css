@@ -676,19 +676,19 @@ nav {
     cursor: pointer;
     width: 100%;
     overflow: hidden;
+    line-height: 0;
+    /* Remove extra space below image */
 }
 
-.lead-banner-image {
+.lead-banner-img {
     width: 100%;
-    height: 400px;
-    background-image: url('assets/image.png');
-    background-size: cover;
-    background-position: center;
+    height: auto;
+    display: block;
     transition: transform 0.5s ease;
 }
 
-.banner-image-box:hover .lead-banner-image {
-    transform: scale(1.03);
+.banner-image-box:hover .lead-banner-img {
+    transform: scale(1.02);
 }
 
 .lead-banner-content-outer {
@@ -808,9 +808,10 @@ nav {
 }
 
 .lead-form textarea {
-    height: 100px;
+    height: 200px;
     resize: vertical;
 }
+
 
 .lead-form input:focus,
 .lead-form textarea:focus {
@@ -871,9 +872,7 @@ nav {
 }
 
 @media (max-width: 480px) {
-    .lead-banner-image {
-        height: 250px;
-    }
+
 
     .lead-banner h3 {
         font-size: 1.6rem;
