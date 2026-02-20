@@ -71,37 +71,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const validateForm = () => {
         clearErrors();
-        let isValid = true;
         const data = new FormData(form);
-
-        if (!data.get('company').trim()) {
-            showError('company', 'Company name is required');
-            isValid = false;
-        }
-        if (!data.get('name').trim()) {
-            showError('name', 'Contact person is required');
-            isValid = false;
-        }
-
-        const phone = data.get('phone').trim();
-        if (!phone) {
-            showError('phone', 'Phone number is required');
-            isValid = false;
-        } else if (!/^\+?[\d\s-]{10,}$/.test(phone)) {
-            showError('phone', 'Enter a valid phone number');
-            isValid = false;
-        }
-
+        const company = data.get('company').trim();
+        const name = data.get('name').trim();
+        let phone = data.get('phone').trim();
         const email = data.get('email').trim();
-        if (!email) {
-            showError('email', 'Email is required');
-            isValid = false;
-        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            showError('email', 'Enter a valid email address');
-            isValid = false;
+
+        // Basic presence validation
+        if (!company) {
+            alert('Company name is required');
+            return false;
+        }
+        if (!name) {
+            alert('Contact person is required');
+            return false;
         }
 
-        return isValid;
+        // --- PHONE VALIDATION ---
+        // 1. Remove all leading 0s
+        while (phone.startsWith('0')) {
+            phone = phone.substring(1);
+        }
+        document.getElementById('phone').value = phone; // Update field visually
+
+        if (!phone) {
+            alert('Phone number is required');
+            return false;
+        }
+
+        // Strip spaces/dashes for count verification
+        const cleanPhone = phone.replace(/[\s-]/g, '');
+
+        if (phone.startsWith('+')) {
+            // Rule: +XX must be exactly 13 characters (e.g., +919876543210)
+            if (cleanPhone.length !== 13) {
+                alert('International phone numbers starting with + must be exactly 13 characters long including + (e.g., +919876543210)');
+                return false;
+            }
+        } else {
+            // Rule: No + must be exactly 10 digits
+            if (!/^\d{10}$/.test(cleanPhone)) {
+                alert('Phone number must be exactly 10 digits');
+                return false;
+            }
+        }
+
+
+        // --- EMAIL VALIDATION ---
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!email) {
+            alert('Email is required');
+            return false;
+        }
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address');
+            return false;
+        }
+
+        return true;
     };
 
     // Submit Handling
@@ -109,6 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         if (!validateForm()) return;
+
 
         submitBtn.disabled = true;
         submitBtn.textContent = 'Submitting...';
