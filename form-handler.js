@@ -87,45 +87,45 @@ document.addEventListener('DOMContentLoaded', () => {
             return false;
         }
 
-        // --- PHONE VALIDATION ---
-        // 1. Remove all leading 0s
-        while (phone.startsWith('0')) {
-            phone = phone.substring(1);
-        }
-        document.getElementById('phone').value = phone; // Update field visually
-
-        if (!phone) {
-            alert('Phone number is required');
+        if (!phone && !email) {
+            alert('Please provide either a Phone number or an Email address');
             return false;
         }
 
-        // Strip spaces/dashes for count verification
-        const cleanPhone = phone.replace(/[\s-]/g, '');
-
-        if (phone.startsWith('+')) {
-            // Rule: +XX must be exactly 13 characters (e.g., +919876543210)
-            if (cleanPhone.length !== 13) {
-                alert('International phone numbers starting with + must be exactly 13 characters long including + (e.g., +919876543210)');
-                return false;
+        // --- PHONE VALIDATION ---
+        if (phone) {
+            // 1. Remove all leading 0s
+            while (phone.startsWith('0')) {
+                phone = phone.substring(1);
             }
-        } else {
-            // Rule: No + must be exactly 10 digits
-            if (!/^\d{10}$/.test(cleanPhone)) {
-                alert('Phone number must be exactly 10 digits');
-                return false;
+            document.getElementById('phone').value = phone; // Update field visually
+
+            // Strip spaces/dashes for count verification
+            const cleanPhone = phone.replace(/[\s-]/g, '');
+
+            if (phone.startsWith('+')) {
+                // Rule: +XX must be exactly 13 characters (e.g., +919876543210)
+                if (cleanPhone.length !== 13) {
+                    alert('International phone numbers starting with + must be exactly 13 characters long including + (e.g., +919876543210)');
+                    return false;
+                }
+            } else {
+                // Rule: No + must be exactly 10 digits
+                if (!/^\d{10}$/.test(cleanPhone)) {
+                    alert('Phone number must be exactly 10 digits');
+                    return false;
+                }
             }
         }
 
 
         // --- EMAIL VALIDATION ---
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        if (!email) {
-            alert('Email is required');
-            return false;
-        }
-        if (!emailRegex.test(email)) {
-            alert('Please enter a valid email address');
-            return false;
+        if (email) {
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address');
+                return false;
+            }
         }
 
         return true;
