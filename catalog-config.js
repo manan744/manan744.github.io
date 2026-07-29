@@ -3,21 +3,20 @@
 // and update defaultVolume. Array order = display order (newest first).
 window.CATALOG = {
     // Volume shown by default on the homepage and used for no-JS fallback links.
-    defaultVolume: 'vol1',
+    defaultVolume: 'vol3',
 
     volumes: [
         {
-            id: 'vol2',
-            label: 'Vol-2',
+            id: 'vol3',
+            label: 'Vol-3',
             year: '2026',
-            title: 'Vol-2 · 2026',
-            available: false,
-            comingSoon: true,
-            viewUrl: '',
-            downloadUrl: '',
-            sizeNote: '',
-            description: 'All-new collections launching soon',
-            collectionNames: []
+            title: 'Vol-3 · 2026',
+            available: true,
+            viewUrl: 'https://github.com/manan744/manan744.github.io/releases/download/v2.0.0/the.glassmic.VOLUME.3.pdf',
+            downloadUrl: 'https://github.com/manan744/manan744.github.io/releases/download/v2.0.0/the.glassmic.VOLUME.3.pdf',
+            sizeNote: '~190 MB high-resolution PDF — Wi-Fi recommended',
+            description: 'Neer, Divine Diwali and Navrang collections',
+            collectionNames: ['Neer', 'Divine Diwali', 'Navrang']
         },
         {
             id: 'vol1',

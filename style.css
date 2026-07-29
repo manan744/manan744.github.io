@@ -663,6 +663,7 @@ nav {
 }
 
 .gallery-item {
+    position: relative;
     break-inside: avoid;
     margin-bottom: 20px;
     border-radius: 16px;
