@@ -12,10 +12,11 @@ window.CATALOG = {
             year: '2026',
             title: 'Vol-2 · 2026',
             available: false,
+            comingSoon: true,
             viewUrl: '',
             downloadUrl: '',
             sizeNote: '',
-            description: '',
+            description: 'All-new collections launching soon',
             collectionNames: []
         },
         {
