@@ -1201,3 +1201,325 @@ nav {
         font-size: 0.85rem;
     }
 }
+/* ===== Enhancements: FABs, lightbox, basket, search, reveal, hero, story ===== */
+
+/* Floating action buttons */
+.fab-stack {
+    position: fixed;
+    right: 1.1rem;
+    bottom: calc(1.1rem + env(safe-area-inset-bottom, 0px));
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.7rem;
+    z-index: 1500;
+}
+
+.whatsapp-fab {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: #25D366;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+    transition: transform 0.25s ease;
+}
+
+.whatsapp-fab:hover {
+    transform: scale(1.08);
+}
+
+.inquiry-fab {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 0.7rem 1.3rem;
+    border-radius: 999px;
+    background: var(--accent-color);
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(43, 108, 176, 0.4);
+    transition: transform 0.25s ease;
+}
+
+.inquiry-fab:hover {
+    transform: scale(1.05);
+}
+
+/* Add-to-inquiry button on gallery items */
+.add-inquiry {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--accent-color);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(4px);
+    transition: all 0.25s ease;
+    z-index: 5;
+}
+
+.add-inquiry.added {
+    background: var(--accent-color);
+    color: #fff;
+}
+
+/* Lightbox */
+#lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(12, 14, 20, 0.93);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2500;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease;
+}
+
+#lightbox.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+#lightbox figure {
+    margin: 0;
+    max-width: min(92vw, 640px);
+    text-align: center;
+}
+
+#lightbox img {
+    max-width: 100%;
+    max-height: 72vh;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+#lightbox figcaption {
+    margin-top: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.lb-code {
+    color: #fff;
+    font-size: 1.05rem;
+    letter-spacing: 0.05em;
+}
+
+.lb-add {
+    font-size: 0.9rem;
+    padding: 0.55rem 1.3rem;
+}
+
+.lb-add.added {
+    background: #2f855a;
+}
+
+.lb-close,
+.lb-prev,
+.lb-next {
+    position: absolute;
+    border: none;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 46px;
+    height: 46px;
+    font-size: 1.4rem;
+    line-height: 1;
+    transition: background 0.2s ease;
+    z-index: 2;
+}
+
+.lb-close:hover,
+.lb-prev:hover,
+.lb-next:hover {
+    background: rgba(255, 255, 255, 0.28);
+}
+
+.lb-close {
+    top: calc(1rem + env(safe-area-inset-top, 0px));
+    right: 1rem;
+    font-size: 1.8rem;
+}
+
+.lb-prev {
+    left: 0.7rem;
+}
+
+.lb-next {
+    right: 0.7rem;
+}
+
+/* Product code search */
+.code-search {
+    margin-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.code-search input {
+    width: min(88vw, 380px);
+    padding: 0.75rem 1.2rem;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background: rgba(255, 255, 255, 0.75);
+    font-family: inherit;
+    font-size: 1rem;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.code-search input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.15);
+}
+
+.search-count {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+/* Scroll reveal */
+.reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+/* Hero slideshow */
+.hero-card.has-slides {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-slides img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+}
+
+.hero-slides img.active {
+    opacity: 1;
+}
+
+.hero-veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(253, 251, 249, 0.82), rgba(253, 251, 249, 0.72));
+}
+
+.hero-card.has-slides h1,
+.hero-card.has-slides p,
+.hero-card.has-slides .cta-button {
+    position: relative;
+    z-index: 1;
+}
+
+/* Story section */
+.story-section {
+    padding: 2rem 5%;
+    margin-bottom: 2rem;
+}
+
+.story-card {
+    max-width: 900px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 0;
+}
+
+.story-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.story-content {
+    padding: 2rem;
+    text-align: center;
+}
+
+.story-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.9rem;
+    color: var(--primary-color);
+}
+
+.story-content p {
+    color: var(--text-light);
+    line-height: 1.75;
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+    .lb-prev,
+    .lb-next {
+        width: 40px;
+        height: 40px;
+        bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+        top: auto;
+    }
+
+    .lb-prev {
+        left: 18vw;
+    }
+
+    .lb-next {
+        right: 18vw;
+    }
+
+    .story-content {
+        padding: 1.4rem;
+    }
+}
+
+/* Image download deterrence (catalogue PDF is the sanctioned download) */
+.gallery-item img,
+#lightbox img,
+.card-image img,
+.collection-banner img,
+.hero-slides img,
+.story-card img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+}
