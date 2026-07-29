@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var config = window.CATALOG;
     if (!config || !config.volumes) return;
 
-    var availableVolumes = config.volumes.filter(function (v) { return v.available; });
+    // "Visible" volumes appear in the UI; only "available" ones have working PDFs.
+    var visibleVolumes = config.volumes.filter(function (v) { return v.available || v.comingSoon; });
     var lastTrigger = null;
 
     /* ---------- Chooser modal ---------- */
@@ -19,9 +20,15 @@ document.addEventListener('DOMContentLoaded', function () {
         overlay.setAttribute('aria-modal', 'true');
         overlay.setAttribute('aria-labelledby', 'catalogChooserTitle');
 
-        var rows = availableVolumes.map(function (v) {
+        var rows = visibleVolumes.map(function (v) {
             var sub = v.description ? '<span>' + v.description + '</span>' : '';
             var note = v.sizeNote ? '<small>' + v.sizeNote + '</small>' : '';
+            if (!v.available) {
+                return '<div class="volume-row is-unavailable">' +
+                    '<div class="volume-info"><strong>' + v.title + '</strong>' + sub + note + '</div>' +
+                    '<span class="coming-soon">Coming soon</span>' +
+                    '</div>';
+            }
             var view = v.viewUrl
                 ? '<a class="cta-button" href="' + v.viewUrl + '" target="_blank" rel="noopener">View</a>'
                 : '';
@@ -96,8 +103,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var grids = document.querySelectorAll('[data-volume-grid]');
     if (!grids.length) return;
 
-    // Only volumes that are available AND have a grid on this page.
-    var toggleVolumes = availableVolumes.filter(function (v) {
+    // Only visible volumes that have a grid on this page.
+    var toggleVolumes = visibleVolumes.filter(function (v) {
         return document.querySelector('[data-volume-grid="' + v.id + '"]');
     });
     if (toggleVolumes.length < 2) return;
@@ -108,6 +115,12 @@ document.addEventListener('DOMContentLoaded', function () {
         return toggleVolumes.some(function (v) { return v.id === id; });
     }
 
+    // Coming-soon volumes can be viewed by tap or ?vol= link, but are never
+    // a landing default and never remembered across visits.
+    function isAvailable(id) {
+        return toggleVolumes.some(function (v) { return v.id === id && v.available; });
+    }
+
     function storedVolume() {
         try { return localStorage.getItem(STORAGE_KEY); } catch (e) { return null; }
     }
@@ -116,9 +129,10 @@ document.addEventListener('DOMContentLoaded', function () {
         var param = new URLSearchParams(window.location.search).get('vol');
         if (param && isValid(param)) return param;
         var stored = storedVolume();
-        if (stored && isValid(stored)) return stored;
-        if (isValid(config.defaultVolume)) return config.defaultVolume;
-        return toggleVolumes[0].id;
+        if (stored && isAvailable(stored)) return stored;
+        if (isAvailable(config.defaultVolume)) return config.defaultVolume;
+        var firstAvailable = toggleVolumes.filter(function (v) { return v.available; })[0];
+        return (firstAvailable || toggleVolumes[0]).id;
     }
 
     var toggle = document.createElement('div');
@@ -145,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
         toggle.querySelectorAll('[role="tab"]').forEach(function (btn) {
             btn.setAttribute('aria-selected', String(btn.getAttribute('data-volume') === id));
         });
-        if (persist) {
+        if (persist && isAvailable(id)) {
             try { localStorage.setItem(STORAGE_KEY, id); } catch (e) { /* private mode */ }
         }
         var url = new URL(window.location.href);

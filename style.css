@@ -1141,6 +1141,29 @@ nav {
     box-shadow: 0 4px 15px rgba(43, 108, 176, 0.3);
 }
 
+/* Coming-soon teaser card (homepage Vol-2 tab) */
+.coming-soon-card {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.coming-soon-card .coming-soon {
+    font-size: 0.9rem;
+    padding: 0.35rem 1rem;
+}
+
+.coming-soon-card h3 {
+    font-size: 1.6rem;
+    margin: 1rem 0 0.75rem;
+    color: var(--primary-color);
+}
+
+.coming-soon-card p {
+    color: var(--text-light);
+}
+
 /* Volume badge on collection pages */
 .volume-badge {
     display: inline-block;
