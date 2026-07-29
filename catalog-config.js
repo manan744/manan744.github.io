@@ -19,10 +19,10 @@ window.CATALOG = {
             collectionNames: ['Neer', 'Divine Diwali', 'Navrang']
         },
         {
-            id: 'vol1',
-            label: 'Vol-1',
+            id: 'vol2',
+            label: 'Vol-2',
             year: '2025',
-            title: 'Vol-1 · 2025',
+            title: 'Vol-2 · 2025',
             available: true,
             viewUrl: 'https://qr.scan.page/uploads/pdf/hQX6Xe_c21cbf9c921fbb4c.pdf',
             downloadUrl: 'https://github.com/manan744/manan744.github.io/releases/download/v1.0.0/the.glassmic.pdf.5.pdf',
